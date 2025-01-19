@@ -8,10 +8,3 @@ enum TransitionType {
     case scale
     case custom((UIView, UIView, UIView.AnimationTransition) -> Void)
 }
-
-enum TransitionDirection {
-    case left
-    case right
-    case top
-    case bottom
-} 

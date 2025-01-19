@@ -10,9 +10,22 @@
 		5C091FA52CDCCAA0002088C5 /* NavigationStackAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavigationStackAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5C74700C2D3D84A400588E46 /* Exceptions for "NavigationStackAPI" folder in "NavigationStackAPI" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 5C091FA42CDCCAA0002088C5 /* NavigationStackAPI */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5C091FA72CDCCAA0002088C5 /* NavigationStackAPI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5C74700C2D3D84A400588E46 /* Exceptions for "NavigationStackAPI" folder in "NavigationStackAPI" target */,
+			);
 			path = NavigationStackAPI;
 			sourceTree = "<group>";
 		};

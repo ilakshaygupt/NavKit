@@ -29,25 +29,3 @@ struct MainTabView: View {
     }
 }
 
-
-struct SettingsView: View {
-    var body: some View {
-        VStack {
-            Text("Settings")
-                .font(.largeTitle)
-            Spacer()
-        }
-        .padding()
-    }
-}
-
-struct ProfileView: View {
-    var body: some View {
-        VStack {
-            Text("Profile")
-                .font(.largeTitle)
-            Spacer()
-        }
-        .padding()
-    }
-}
