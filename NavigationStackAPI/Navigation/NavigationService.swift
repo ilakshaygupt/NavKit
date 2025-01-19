@@ -19,6 +19,7 @@ class NavigationService: ObservableObject {
         DispatchQueue.main.async { [weak self] in
             self?.transitionDelegate.currentTransition = transition
             let hostingController = UIHostingController(rootView: view)
+            print("Pushing view: \(view)")
             self?.navigationController?.pushViewController(hostingController, animated: animated)
         }
     }

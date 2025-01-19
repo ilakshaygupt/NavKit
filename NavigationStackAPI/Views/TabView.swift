@@ -1,8 +1,10 @@
 import SwiftUI
+import SwiftUI
 
 struct MainTabView: View {
     var body: some View {
         TabView {
+            
             NavigationView {
                 DynamicView(pageNo: 1)
             }
@@ -26,6 +28,7 @@ struct MainTabView: View {
         }
     }
 }
+
 
 struct SettingsView: View {
     var body: some View {
