@@ -2,6 +2,7 @@ import SwiftUI
 
 @main
 struct MyApp: App {
+    // Learn more @ https://developer.apple.com/documentation/swiftui/uiapplicationdelegateadaptor
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
@@ -15,10 +16,3 @@ struct MyApp: App {
         }
     }
 } 
-
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        guard let url = URLContexts.first?.url else { return }
-        DeepLinkHandler.handle(url:url)
-    }
-}

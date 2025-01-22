@@ -6,6 +6,7 @@
 //
 
 import UIKit
+// Learn more @ https://developer.apple.com/documentation/uikit/uinavigationcontrollerdelegate
 class NavigationTransitionDelegate: NSObject, UINavigationControllerDelegate {
     var currentTransition: TransitionType?
     
