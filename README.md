@@ -14,6 +14,10 @@ A powerful and flexible navigation snippets for SwiftUI that provides custom tra
 - Stack depth tracking
 - Multiple navigation operations (push, pop, replace)
 
+## State Diagram
+
+<img width="549" alt="Screenshot 2025-01-22 at 11 19 06 PM" src="https://github.com/user-attachments/assets/6441a640-90a2-4ff8-adcb-ebdc3aa28cf5" />
+
 ## Installation
 
 1. Clone the repository
