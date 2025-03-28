@@ -1,9 +1,10 @@
 //
 //  TransitionDirection.swift
-//  NavigationStackAPI
+//  NavKit
 //
-//  Created by Lakshay Gupta on 20/01/25.
+//  Created by Lakshay Gupta on 28/03/25.
 //
+
 
 #if os(iOS)
 import Foundation
