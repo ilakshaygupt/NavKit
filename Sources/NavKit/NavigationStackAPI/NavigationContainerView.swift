@@ -6,7 +6,7 @@ import UIKit
 
 
 // Learn more @ https://developer.apple.com/documentation/swiftui/UIViewControllerRepresentable
-struct NavigationContainerView<Content: View>: UIViewControllerRepresentable {
+public struct NavigationContainerView<Content: View>: UIViewControllerRepresentable {
     let content: Content
     
     init(@ViewBuilder content: () -> Content) {

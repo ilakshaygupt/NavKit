@@ -1,93 +1,208 @@
 # NavKit
 
-NavKit is a powerful and flexible navigation framework for iOS applications that enables custom transition animations between view controllers. Built on top of UIKit's navigation system, NavKit provides an elegant API to create beautiful and interactive navigation experiences.
+NavKit is a powerful and flexible navigation solution for SwiftUI applications that provides programmatic navigation control while maintaining SwiftUI's declarative syntax.
 
 ## Features
 
-- Custom transition animations between view controllers
-- Built on top of UIKit's native navigation system
-- Easy to integrate with existing iOS projects
-- Type-safe API
-- Support for both push and pop transitions
+- 🚀 Programmatic navigation from anywhere in your app
+- 📱 Full SwiftUI integration
+- 🎯 Type-safe navigation
+- 🔄 Support for complex navigation flows
+- 🎨 Customizable navigation behaviors
 
 ## Requirements
 
 - iOS 13.0+
-- Swift 5.0+
-- Xcode 14.0+
+- Xcode 13.0+
+- Swift 5.5+
 
 ## Installation
 
 ### Swift Package Manager
 
-Add NavKit to your project through Swift Package Manager by adding it to your `Package.swift` file:
+1. In Xcode, select **File** → **Add Packages...**
+2. Enter the package URL: `https://github.com/yourusername/NavKit.git`
+3. Select **Up to Next Major Version** and specify **1.0.0**
+4. Click **Add Package**
+
+### Manual SPM Integration
+
+Add the following to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "YOUR_REPOSITORY_URL", from: "1.0.0")
+    .package(url: "https://github.com/yourusername/NavKit.git", from: "1.0.0")
 ]
 ```
 
-Or add it directly through Xcode:
-1. File > Add Packages...
-2. Enter the repository URL
-3. Select the version you want to use
+## Quick Start Guide
 
-## Usage
+### 1. Setup NavigationContainerView
 
-### Basic Setup
-
-1. Import NavKit in your view controller:
+First, wrap your root view in a `NavigationContainerView`:
 
 ```swift
+import SwiftUI
 import NavKit
-```
 
-2. Create a navigation controller with custom transitions:
-
-```swift
-let navigationController = UINavigationController()
-let transitionDelegate = NavigationTransitionDelegate()
-navigationController.delegate = transitionDelegate
-```
-
-### Performing Custom Transitions
-
-To perform a custom transition between view controllers:
-
-```swift
-// Set the transition type before pushing
-transitionDelegate.currentTransition = .yourTransitionType
-
-// Push the view controller
-navigationController.pushViewController(destinationVC, animated: true)
-```
-
-## Example
-
-Here's a complete example of how to use NavKit:
-
-```swift
-class SourceViewController: UIViewController {
-    private let transitionDelegate = NavigationTransitionDelegate()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.delegate = transitionDelegate
-    }
-    
-    func navigateToDetail() {
-        let detailVC = DetailViewController()
-        transitionDelegate.currentTransition = .slide // or your custom transition
-        navigationController?.pushViewController(detailVC, animated: true)
+@main
+struct YourApp: App {
+    var body: some Scene {
+        WindowGroup {
+            NavigationContainerView {
+                RootView()
+            }
+        }
     }
 }
 ```
 
+### 2. Create Your Views
+
+Create the views you want to navigate between:
+
+```swift
+struct RootView: View {
+    var body: some View {
+        VStack {
+            Text("Welcome to NavKit!")
+            Button("Go to Detail") {
+                // Navigation code will go here
+            }
+        }
+    }
+}
+
+struct DetailView: View {
+    var body: some View {
+        Text("Detail View")
+    }
+}
+```
+
+### 3. Setup Navigation Service
+
+Initialize the NavigationService in your view:
+
+```swift
+struct RootView: View {
+    var body: some View {
+        VStack {
+            Text("Welcome to NavKit!")
+            Button("Go to Detail") {
+                NavigationService.shared.push(DetailView())
+            }
+        }
+    }
+}
+```
+
+## Navigation Methods
+
+NavKit provides several navigation methods:
+
+### Push Navigation
+
+```swift
+// Push a new view
+NavigationService.shared.push(DetailView())
+
+// Push with animation
+NavigationService.shared.push(DetailView(), animated: true)
+```
+
+### Pop Navigation
+
+```swift
+// Pop one level
+NavigationService.shared.pop()
+
+// Pop to root
+NavigationService.shared.popToRoot()
+
+// Pop multiple levels
+NavigationService.shared.pop(count: 2)
+```
+
+### Replace Navigation
+
+```swift
+// Replace current view
+NavigationService.shared.replace(with: NewView())
+
+// Replace entire stack
+NavigationService.shared.replaceStack(with: NewView())
+```
+
+## Advanced Usage
+
+### Passing Data
+
+```swift
+struct DetailView: View {
+    let data: String
+    
+    var body: some View {
+        Text(data)
+    }
+}
+
+// In your navigation code
+NavigationService.shared.push(DetailView(data: "Hello from NavKit!"))
+```
+
+### Custom Transitions
+
+```swift
+NavigationService.shared.push(DetailView(), transition: .custom)
+```
+
+### Navigation Events
+
+```swift
+NavigationService.shared.onNavigationComplete = { 
+    print("Navigation completed")
+}
+```
+
+## Best Practices
+
+1. **Single Source of Truth**: Use NavigationService as the single source of truth for navigation.
+2. **View Organization**: Keep your views modular and independent.
+3. **State Management**: Handle state changes appropriately during navigation.
+4. **Error Handling**: Implement proper error handling for navigation failures.
+
+## Common Issues and Solutions
+
+### Issue: Navigation Not Working
+- Ensure NavigationContainerView is properly set up
+- Check if NavigationService is properly initialized
+- Verify view hierarchy is correct
+
+### Issue: Animations Not Working
+- Confirm animation parameters are correct
+- Check if device settings allow animations
+- Verify iOS version compatibility
+
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ## License
 
-NavKit is available under the MIT license. See the LICENSE file for more info. 
+NavKit is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
+
+## Support
+
+For issues, questions, or contributions, please:
+1. Check existing GitHub issues
+2. Create a new issue if needed
+3. Join our [Discord community](link-to-discord)
+
+## Credits
+
+NavKit is maintained by [Your Name/Organization].
+
+---
+
+We hope you enjoy using NavKit! For more examples and detailed documentation, visit our [Wiki](link-to-wiki). 

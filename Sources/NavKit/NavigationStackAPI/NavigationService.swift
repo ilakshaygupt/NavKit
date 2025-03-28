@@ -5,8 +5,8 @@ import UIKit
 import SwiftUI
 
 @MainActor
-class NavigationService: ObservableObject {
-    static let shared = NavigationService()
+public class NavigationService: ObservableObject {
+    public static let shared = NavigationService()
 
     private var navigationController: UINavigationController?
     private let transitionDelegate = NavigationTransitionDelegate()
