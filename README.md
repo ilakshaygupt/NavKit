@@ -188,11 +188,3 @@ NavigationService.shared.onNavigationComplete = {
 ## License
 
 NavKit is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
-
-
- 
-NavKit is maintained by [Your Name/Organization].
-
----
-
-We hope you enjoy using NavKit! For more examples and detailed documentation, visit our [Wiki](link-to-wiki). 
