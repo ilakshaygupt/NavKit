@@ -21,7 +21,7 @@ NavKit is a powerful and flexible navigation solution for SwiftUI applications t
 ### Swift Package Manager
 
 1. In Xcode, select **File** → **Add Packages...**
-2. Enter the package URL: `https://github.com/yourusername/NavKit.git`
+2. Enter the package URL: `https://github.com/ilakshaygupt/NavKit.git`
 3. Select **Up to Next Major Version** and specify **1.0.0**
 4. Click **Add Package**
 
@@ -31,7 +31,7 @@ Add the following to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yourusername/NavKit.git", from: "1.0.0")
+    .package(url: "https://github.com/ilakshaygupt/NavKit.git", from: "1.0.2")
 ]
 ```
 
