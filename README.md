@@ -184,23 +184,13 @@ NavigationService.shared.onNavigationComplete = {
 - Check if device settings allow animations
 - Verify iOS version compatibility
 
-## Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
 
 ## License
 
 NavKit is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
 
-## Support
 
-For issues, questions, or contributions, please:
-1. Check existing GitHub issues
-2. Create a new issue if needed
-3. Join our [Discord community](link-to-discord)
-
-## Credits
-
+ 
 NavKit is maintained by [Your Name/Organization].
 
 ---
