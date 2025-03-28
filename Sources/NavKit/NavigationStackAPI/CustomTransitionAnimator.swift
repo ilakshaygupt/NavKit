@@ -1,22 +1,24 @@
+#if os(iOS)
+import Foundation
 import UIKit
 
-class CustomTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
+public class CustomTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     let transitionType: TransitionType
     let isPresenting: Bool
     let duration: TimeInterval
 
-    init(transitionType: TransitionType, isPresenting: Bool, duration: TimeInterval = 0.3) {
+    public init(transitionType: TransitionType, isPresenting: Bool, duration: TimeInterval = 0.3) {
         self.transitionType = transitionType
         self.isPresenting = isPresenting
         self.duration = duration
         super.init()
     }
 
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    public func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
 
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    public func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let toView = transitionContext.view(forKey: .to),
               let fromView = transitionContext.view(forKey: .from) else {
             return
@@ -109,3 +111,6 @@ class CustomTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning 
         })
     }
 }
+
+
+#endif

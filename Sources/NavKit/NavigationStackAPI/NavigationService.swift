@@ -1,4 +1,7 @@
+#if os(iOS)
+import Foundation
 import UIKit
+
 import SwiftUI
 
 @MainActor
@@ -88,3 +91,5 @@ class NavigationService: ObservableObject {
         return navigationController?.viewControllers.count ?? 0
     }
 }
+
+#endif

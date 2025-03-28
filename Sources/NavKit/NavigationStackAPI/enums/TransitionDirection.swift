@@ -5,10 +5,13 @@
 //  Created by Lakshay Gupta on 20/01/25.
 //
 
+#if os(iOS)
+import Foundation
 
-enum TransitionDirection {
+public enum TransitionDirection {
     case left
     case right
     case top
     case bottom
-} 
+}
+#endif 

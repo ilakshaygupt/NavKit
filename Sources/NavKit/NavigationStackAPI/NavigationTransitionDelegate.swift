@@ -5,13 +5,17 @@
 //  Created by Lakshay Gupta on 14/01/25.
 //
 
+#if os(iOS)
+import Foundation
 import UIKit
+
 // Learn more @ https://developer.apple.com/documentation/uikit/uinavigationcontrollerdelegate
-class NavigationTransitionDelegate: NSObject, UINavigationControllerDelegate {
-    var currentTransition: TransitionType?
+public class NavigationTransitionDelegate: NSObject, UINavigationControllerDelegate {
+    public var currentTransition: TransitionType?
     
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    public func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         guard let transition = currentTransition else { return nil }
         return CustomTransitionAnimator(transitionType: transition, isPresenting: operation == .push)
     }
 }
+#endif

@@ -1,12 +1,20 @@
 import SwiftUI
+#if os(iOS)
+import Foundation
 import UIKit
 
 
+
 // Learn more @ https://developer.apple.com/documentation/swiftui/UIViewControllerRepresentable
-struct NavigationContainerView: UIViewControllerRepresentable {
+struct NavigationContainerView<Content: View>: UIViewControllerRepresentable {
+    let content: Content
+    
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+    
     func makeUIViewController(context: Context) -> UINavigationController {
-        let rootView = MainTabView()
-        let hostingController = UIHostingController(rootView: rootView)
+        let hostingController = UIHostingController(rootView: content)
         let navigationController = UINavigationController(rootViewController: hostingController)
         NavigationService.shared.setup(with: navigationController)
         return navigationController
@@ -14,3 +22,5 @@ struct NavigationContainerView: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {}
 } 
+
+#endif
