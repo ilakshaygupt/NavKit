@@ -9,18 +9,18 @@ import UIKit
 public struct NavigationContainerView<Content: View>: UIViewControllerRepresentable {
     let content: Content
     
-    init(@ViewBuilder content: () -> Content) {
+    public init(@ViewBuilder content: () -> Content) {
         self.content = content()
     }
     
-    func makeUIViewController(context: Context) -> UINavigationController {
+    public func makeUIViewController(context: Context) -> UINavigationController {
         let hostingController = UIHostingController(rootView: content)
         let navigationController = UINavigationController(rootViewController: hostingController)
         NavigationService.shared.setup(with: navigationController)
         return navigationController
     }
     
-    func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {}
+    public func updateUIViewController(_ uiViewController: UINavigationController, context: Context) {}
 } 
 
 #endif

@@ -13,13 +13,13 @@ public class NavigationService: ObservableObject {
 
     private init() {}
 
-    func setup(with navigationController: UINavigationController) {
+    public func setup(with navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.navigationController?.delegate = transitionDelegate
     }
 
     // Push a new view
-    func push<T: View>(_ view: T, transition: TransitionType? = nil, animated: Bool = true) {
+    public func push<T: View>(_ view: T, transition: TransitionType? = nil, animated: Bool = true) {
         DispatchQueue.main.async { [weak self] in
             self?.transitionDelegate.currentTransition = transition
             let hostingController = UIHostingController(rootView: view)
@@ -28,7 +28,7 @@ public class NavigationService: ObservableObject {
         }
     }
 
-    func pushAsRoot<T: View>(_ view: T, transition: TransitionType? = nil, animated: Bool = true) {
+    public func pushAsRoot<T: View>(_ view: T, transition: TransitionType? = nil, animated: Bool = true) {
         DispatchQueue.main.async { [weak self] in
             guard let navigationController = self?.navigationController else {
                 print("Error: NavigationController is not set.")
@@ -43,7 +43,7 @@ public class NavigationService: ObservableObject {
 
 
 
-    func pushAndReplace<T: View>(_ view: T, transition: TransitionType? = nil, animated: Bool = true) {
+    public func pushAndReplace<T: View>(_ view: T, transition: TransitionType? = nil, animated: Bool = true) {
         DispatchQueue.main.async { [weak self] in
             guard var viewControllers = self?.navigationController?.viewControllers else { return }
             self?.transitionDelegate.currentTransition = transition
@@ -56,7 +56,7 @@ public class NavigationService: ObservableObject {
 
 
     // Pop current view
-    func pop(animated: Bool = true) {
+    public func pop(animated: Bool = true) {
         DispatchQueue.main.async { [weak self] in
             self?.transitionDelegate.currentTransition = .pop
             self?.navigationController?.popViewController(animated: animated)
@@ -64,7 +64,7 @@ public class NavigationService: ObservableObject {
     }
 
 
-    func popToRoot(animated: Bool = true) {
+    public func popToRoot(animated: Bool = true) {
         DispatchQueue.main.async { [weak self] in
             self?.transitionDelegate.currentTransition = .pop
             self?.navigationController?.popToRootViewController(animated: animated)
@@ -72,7 +72,7 @@ public class NavigationService: ObservableObject {
     }
 
 
-    func popToIndex(_ index: Int, animated: Bool = true) {
+    public func popToIndex(_ index: Int, animated: Bool = true) {
         DispatchQueue.main.async { [weak self] in
             guard let viewControllers = self?.navigationController?.viewControllers,
                   index < viewControllers.count else { return }
@@ -82,12 +82,12 @@ public class NavigationService: ObservableObject {
     }
 
 
-    var canPop: Bool {
+    public var canPop: Bool {
         return (navigationController?.viewControllers.count ?? 0) > 1
     }
 
 
-    var stackCount: Int {
+    public var stackCount: Int {
         return navigationController?.viewControllers.count ?? 0
     }
 }
