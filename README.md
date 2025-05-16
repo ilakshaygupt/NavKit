@@ -31,7 +31,7 @@ Add the following to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/ilakshaygupt/NavKit.git", from: "1.0.2")
+    .package(url: "https://github.com/ilakshaygupt/NavKit.git", from: "<latest-release-version(ex-1.0.4)>")
 ]
 ```
 
