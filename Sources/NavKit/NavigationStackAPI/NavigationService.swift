@@ -26,6 +26,20 @@ public class NavigationService: ObservableObject {
         self.navigationController?.delegate = transitionDelegate
     }
 
+    private func logStack(action: String) {
+        guard let navigationController = navigationController else {
+            print("[NavKit] Action=\(action) | NavigationController not set")
+            return
+        }
+        let stackDescriptions = navigationController.viewControllers.enumerated().map { (idx, vc) -> String in
+            if let hosting = vc as? UIHostingController<AnyView> {
+                return "[#\(idx)] UIHostingController<AnyView>"
+            }
+            return "[#\(idx)] \(String(describing: type(of: vc)))"
+        }
+        print("[NavKit] Action=\(action) | StackCount=\(navigationController.viewControllers.count)\n" + stackDescriptions.joined(separator: "\n"))
+    }
+
     // Push a new view
     public func push<T: View>(_ view: T, transition: TransitionType? = nil, animated: Bool = true) {
         push(NavigationDestination(view), transition: transition, animated: animated)
@@ -40,8 +54,9 @@ public class NavigationService: ObservableObject {
         DispatchQueue.main.async { [weak self] in
             self?.transitionDelegate.currentTransition = transition
             let hostingController = UIHostingController(rootView: destination.view)
-            print("Pushing destination: \(destination)")
+            print("[NavKit] Pushing destination: \(destination)")
             self?.navigationController?.pushViewController(hostingController, animated: animated)
+            self?.logStack(action: "push")
         }
     }
 
@@ -63,7 +78,8 @@ public class NavigationService: ObservableObject {
             self?.transitionDelegate.currentTransition = transition
             let hostingController = UIHostingController(rootView: destination.view)
             navigationController.setViewControllers([hostingController], animated: animated)
-            print("Root destination set successfully.")
+            print("[NavKit] Root destination set successfully.")
+            self?.logStack(action: "pushAsRoot")
         }
     }
 
@@ -81,6 +97,7 @@ public class NavigationService: ObservableObject {
             viewControllers.removeLast()
             viewControllers.append(hostingController)  
             self?.navigationController?.setViewControllers(viewControllers, animated: animated)
+            self?.logStack(action: "pushAndReplace")
         }
     }
 
@@ -95,6 +112,7 @@ public class NavigationService: ObservableObject {
         DispatchQueue.main.async { [weak self] in
             self?.transitionDelegate.currentTransition = .pop
             self?.navigationController?.popViewController(animated: animated)
+            self?.logStack(action: "pop")
         }
     }
 
@@ -103,6 +121,7 @@ public class NavigationService: ObservableObject {
         DispatchQueue.main.async { [weak self] in
             self?.transitionDelegate.currentTransition = .pop
             self?.navigationController?.popToRootViewController(animated: animated)
+            self?.logStack(action: "popToRoot")
         }
     }
 
@@ -113,6 +132,7 @@ public class NavigationService: ObservableObject {
                   index < viewControllers.count else { return }
             self?.transitionDelegate.currentTransition = .pop
             self?.navigationController?.popToViewController(viewControllers[index], animated: animated)
+            self?.logStack(action: "popToIndex(\(index))")
         }
     }
     
@@ -126,6 +146,7 @@ public class NavigationService: ObservableObject {
                 if let hostingController = viewController as? UIHostingController<T> {
                     self?.transitionDelegate.currentTransition = .pop
                     navigationController.popToViewController(hostingController, animated: animated)
+                    self?.logStack(action: "popUntil(\(String(describing: viewType))) @ index \(index)")
                     return
                 }
             }
@@ -148,6 +169,7 @@ public class NavigationService: ObservableObject {
                         if String(describing: hostingController.rootView).contains(routeString) {
                             self?.transitionDelegate.currentTransition = .pop
                             navigationController.popToViewController(hostingController, animated: animated)
+                            self?.logStack(action: "popUntil(route: \(routeString))")
                             return
                         }
                     } else if case .view(let targetView) = destination {
@@ -155,6 +177,7 @@ public class NavigationService: ObservableObject {
                         if String(describing: hostingController.rootView) == String(describing: targetView) {
                             self?.transitionDelegate.currentTransition = .pop
                             navigationController.popToViewController(hostingController, animated: animated)
+                            self?.logStack(action: "popUntil(view: \(String(describing: targetView)))")
                             return
                         }
                     }
