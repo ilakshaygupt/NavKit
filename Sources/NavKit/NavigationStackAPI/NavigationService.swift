@@ -31,6 +31,11 @@ public class NavigationService: ObservableObject {
         push(NavigationDestination(view), transition: transition, animated: animated)
     }
     
+    // Push a new route
+    public func push<R: Route>(_ route: R, transition: TransitionType? = nil, animated: Bool = true) {
+        push(NavigationDestination(route), transition: transition, animated: animated)
+    }
+    
     public func push(_ destination: NavigationDestination, transition: TransitionType? = nil, animated: Bool = true) {
         DispatchQueue.main.async { [weak self] in
             self?.transitionDelegate.currentTransition = transition
@@ -42,6 +47,11 @@ public class NavigationService: ObservableObject {
 
     public func pushAsRoot<T: View>(_ view: T, transition: TransitionType? = nil, animated: Bool = true) {
         pushAsRoot(NavigationDestination(view), transition: transition, animated: animated)
+    }
+    
+    // Push a route as root
+    public func pushAsRoot<R: Route>(_ route: R, transition: TransitionType? = nil, animated: Bool = true) {
+        pushAsRoot(NavigationDestination(route), transition: transition, animated: animated)
     }
     
     public func pushAsRoot(_ destination: NavigationDestination, transition: TransitionType? = nil, animated: Bool = true) {
@@ -72,6 +82,11 @@ public class NavigationService: ObservableObject {
             viewControllers.append(hostingController)  
             self?.navigationController?.setViewControllers(viewControllers, animated: animated)
         }
+    }
+
+    // Push a route and replace current
+    public func pushAndReplace<R: Route>(_ route: R, transition: TransitionType? = nil, animated: Bool = true) {
+        pushAndReplace(NavigationDestination(route), transition: transition, animated: animated)
     }
 
 

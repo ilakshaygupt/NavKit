@@ -11,14 +11,14 @@ import SwiftUI
 
 public enum NavigationDestination {
     case view(AnyView)
-    case route(any Route)
+    case route(AnyRoute)
     
     public init<T: View>(_ view: T) {
         self = .view(AnyView(view))
     }
     
     public init<R: Route>(_ route: R) {
-        self = .route(route)
+        self = .route(AnyRoute(route))
     }
     
     var view: AnyView {
