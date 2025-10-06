@@ -7,7 +7,7 @@
 
 #if os(iOS)
 import Foundation
-
+import SwiftUI
 public protocol Route: CaseIterable, Hashable {
     associatedtype ViewType: View
     func makeView() -> ViewType
